@@ -16,8 +16,6 @@ public class Main {
             if(n == 1){
                 System.out.println("Has escollit l'opció " + n);
                 System.out.println("Si us plau creeu el vostre contacte ");
-
-
             } else if (n == 2) {
                 System.out.println("Has escollit l'opció " + n);
             } else if (n == 3) {
