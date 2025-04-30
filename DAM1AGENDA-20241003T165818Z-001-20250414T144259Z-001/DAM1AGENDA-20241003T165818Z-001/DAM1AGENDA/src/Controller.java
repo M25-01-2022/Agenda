@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    protected int idCount=0;
+    protected int idCount = 0;
 
     ArrayList<Contacte> contactsList = new ArrayList<>();
 
@@ -12,7 +12,12 @@ public class Controller {
 
         contactsList.add(a);
 
-        idCount++;
+        setIdCount(idCount);
 
+    }
+
+    public void setIdCount(int idCount) {
+        idCount++;
+        this.idCount = idCount;
     }
 }

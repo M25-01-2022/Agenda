@@ -12,41 +12,42 @@ public class TUI {
         while (true) {
             try {
                 // prompting the user to choose an option
-                System.out.println("Welcome to the agenda, please choose an option:");
-                System.out.println(" 1. Create new contact.");
-                System.out.println(" 2. Search for existing contacts.");
-                System.out.println(" 3. Update an existing contact.");
-                System.out.println(" 4. Delete an existing contact.");
-                System.out.println(" 5. Show all existing contacts.");
-                System.out.println(" 6. Exit.");
+                showLine("Welcome to the agenda, please choose an option:");
+                showLine(" 1. Create new contact.");
+                showLine(" 2. Search for existing contacts.");
+                showLine(" 3. Update an existing contact.");
+                showLine(" 4. Delete an existing contact.");
+                showLine(" 5. Show all existing contacts.");
+                showLine(" 6. Exit.");
 
                 // taking an input number from user
                 int actionMenu = sc.nextInt();
 
                 //possible actions
                 if (actionMenu == 1) {
-                    System.out.println("Creating new contact...");
+                    showLine("Creating new contact...");
                     newContactInfo();
                 } else if (actionMenu == 2) {
-                    System.out.println("Searching for existing contacts...");
+                    showLine("Searching for existing contacts...");
                     summonSearchMenu();
                 } else if (actionMenu == 3) {
-                    System.out.println("Updating existing contact...");
+                    showLine("Updating existing contact...");
                 } else if (actionMenu == 4) {
-                    System.out.println("Deleting existing contact...");
+                    showLine("Deleting existing contact...");
+                    summonDeletionMenu();
                 } else if (actionMenu == 5) {
-                    System.out.println("Showing all existing contacts...");
+                    showLine("Showing all existing contacts...");
                 } else if (actionMenu == 6){
-                    System.out.println("Exiting the agenda...");
+                    showLine("Exiting the agenda...");
                     System.exit(0);
                 } else {
-                    System.out.println("Input not recognized, please choose an option.");
+                    showLine("Input not recognized, please choose an option.");
 
                 }
 
             } catch (InputMismatchException java_error) {
                 // catching the error, returning the menu
-                System.out.println("Input not recognized, please choose an option.");
+                showLine("Input not recognized, please choose an option.");
                 summonMainMenu();
             }
 
@@ -55,15 +56,25 @@ public class TUI {
 
     }
 
+    public void summonDeletionMenu() {
+
+        showLine("Please input the ID of the contact you want to delete.");
+
+        
+
+
+
+    }
+
     public void summonSearchMenu() {
 
-                System.out.println("Welcome to the search menu, please choose preferred search method:");
-                System.out.println(" 1. Search by ID number.");
-                System.out.println(" 2. Search by name.");
-                System.out.println(" 3. Search by surname.");
-                System.out.println(" 4. Search by phone number.");
-                System.out.println(" 5. Search by email.");
-                System.out.println(" 6. Return to the main menu.");
+        showLine("Welcome to the search menu, please choose preferred search method:");
+        showLine(" 1. Search by ID number.");
+        showLine(" 2. Search by name.");
+        showLine(" 3. Search by surname.");
+        showLine(" 4. Search by phone number.");
+        showLine(" 5. Search by email.");
+        showLine(" 6. Return to the main menu.");
 
                 searchContact();
 
@@ -80,25 +91,25 @@ public class TUI {
                 int actionSearch = sc.nextInt();
 
                 if (actionSearch == 1) {
-                    System.out.println("Searching by ID number...");
+                    showLine("Searching by ID number...");
                 } else if (actionSearch == 2) {
-                    System.out.println("Searching by name...");
+                    showLine("Searching by name...");
                 } else if (actionSearch == 3) {
-                    System.out.println("Searching by surname...");
+                    showLine("Searching by surname...");
                 } else if (actionSearch == 4) {
-                    System.out.println("Searching by phone number...");
+                    showLine("Searching by phone number...");
                 } else if (actionSearch == 5) {
-                    System.out.println("Searching by email...");
+                    showLine("Searching by email...");
                 } else if (actionSearch == 6) {
-                    System.out.println("Returning to main menu...");
+                    showLine("Returning to main menu...");
                     summonMainMenu();
                 } else {
-                    System.out.println("Input not recognized, please choose an option.");
+                    showLine("Input not recognized, please choose an option.");
                     summonSearchMenu();
                 }
             } catch (InputMismatchException java_error) {
                 // catching the error, returning the menu
-                System.out.println("Input not recognized, please choose an option.");
+                showLine("Input not recognized, please choose an option.");
                 summonSearchMenu();
             }
         }
@@ -107,44 +118,44 @@ public class TUI {
 
         try {
 
-            System.out.println("Choose the name for your new contact:");
+            showLine("Choose the name for your new contact:");
 
             String name = sc.next();
 
-            System.out.println("Choose the surname for your new contact:");
+            showLine("Choose the surname for your new contact:");
 
             String surname = sc.next();
 
-            System.out.println("Input your new contact's phone number:");
+            showLine("Input your new contact's phone number:");
 
             String phone = sc.next();
 
-            System.out.println("Input your new contacts email address:");
+            showLine("Input your new contacts email address:");
 
             String emailAdd = sc.next();
 
         String[] info = {name,surname,phone,emailAdd};
 
-        ctrl.contactCreation(info);
+        ctrl.contactCreation(info, ctrl.idCount);
 
-        System.out.println("Your new contact has been added!");
-        System.out.println("ID: " + ctrl.idCount);
-        System.out.println("Name: " + name);
-        System.out.println("Surname: " + surname);
-        System.out.println("Phone Number: " + phone);
-        System.out.println("Email Address: " + emailAdd);
-        System.out.println();
+            showLine("Your new contact has been added!");
+            showLine("ID: " + ctrl.idCount);
+            showLine("Name: " + name);
+            showLine("Surname: " + surname);
+            showLine("Phone Number: " + phone);
+            showLine("Email Address: " + emailAdd);
+            showLine("");
 
         } catch (InputMismatchException java_error) {
             // catching the error, returning the menu
-            System.out.println("Input not recognized, restarting contact creation.");
+            showLine("Input not recognized, restarting contact creation.");
             newContactInfo();
         }
 
         try {
-            System.out.println("What would you like to do now?");
-            System.out.println("1. Add another new contact.");
-            System.out.println("2. Return to the main menu.");
+            showLine("What would you like to do now?");
+            showLine("1. Add another new contact.");
+            showLine("2. Return to the main menu.");
 
             int actionCreate = sc.nextInt();
 
@@ -153,12 +164,17 @@ public class TUI {
             } else if (actionCreate == 2){
                 summonMainMenu();
             } else {
-                System.out.println("Input not recognized, please choose an option.");
+                showLine("Input not recognized, please choose an option.");
             }
 
         } catch (InputMismatchException java_error) {
             // catching the error, returning the menu
-            System.out.println("Input not recognized, please choose an option.");
+            showLine("Input not recognized, please choose an option.");
         }
     }
+
+    public void showLine(String output) {
+        System.out.println(output);
+    }
+
 }

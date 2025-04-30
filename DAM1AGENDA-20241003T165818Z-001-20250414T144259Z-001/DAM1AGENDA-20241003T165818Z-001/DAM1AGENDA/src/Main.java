@@ -3,8 +3,6 @@ public class Main {
 
         TUI newMenu = new TUI();
 
-        Controller controlMaster = new Controller();
-
         newMenu.summonMainMenu();
 
     }
