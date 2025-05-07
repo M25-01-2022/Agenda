@@ -1,30 +1,76 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Main {
+
+    static Controller ctrl = new Controller();
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        sc.useLocale(Locale.ENGLISH);
 
-        while(true){
-            System.out.println("Welcome to agenda, please choose an option");
-            System.out.println("  1. Crea un nou contacte.");
-            System.out.println("  2. Busca un contacte existent.");
-            System.out.println("  3. Actualitza un contacte existent.");
-            System.out.println("  4. Elimina un contacte existent.");
-            System.out.println("  5. Surtida.");
-            int n = sc.nextInt();
-            if(n == 1){
-                System.out.println("Has escollit l'opció " + n);
-                System.out.println("Si us plau creeu el vostre contacte ");
-            } else if (n == 2) {
-                System.out.println("Has escollit l'opció " + n);
-            } else if (n == 3) {
+        TUI newMenu = new TUI();
 
-            } else if (n == 4) {
+        newMenu.summonMainMenu();
 
-            } else if (n == 5) {
-                break;
-            }
-        }
     }
+
+    public static void creation(String[] info) {
+
+        ctrl.contactCreation(info);
+
+    }
+
+    public static int currentID() {
+
+        return ctrl.currentIDCount();
+
+    }
+
+    public static Contacte findID(int inputID) {
+
+        return ctrl.searchingID(inputID);
+
+    }
+
+    public static Contacte findName(String inputName) {
+
+        return ctrl.searchingName(inputName);
+
+    }
+
+    public static Contacte findSurname(String inputSur) {
+
+        return ctrl.searchingSurname(inputSur);
+
+    }
+
+    public static Contacte findPhone(String inputPhone) {
+
+        return ctrl.searchingPhone(inputPhone);
+
+    }
+
+    public static Contacte findEmail(String inputMail) {
+
+        return ctrl.searchingEmail(inputMail);
+
+    }
+
+    public static void deletion(int givenID) {
+
+        ctrl.deleteContact(givenID);
+
+    }
+
+    public static ArrayList<Contacte> revelation() {
+        return ctrl.contactDump();
+    }
+
+    public static void updation(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
+
+        ctrl.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
+
+    }
+
+
+
+
 }
