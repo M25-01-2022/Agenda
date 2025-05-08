@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-public class Controller {
+public abstract class Controller {
 
-    protected int idCount = 0;
+    protected int idCount = 1;
 
     ArrayList<Contacte> contactsList = new ArrayList<>();
 
