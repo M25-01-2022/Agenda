@@ -1,33 +1,47 @@
-import java.io.File;
+import java.io.*;
 
-public class FileController extends Controller{
+public class FileController extends Controller {
 
     private File dataFolder;
 
     private File contactFolder;
 
+    public FileController(String dataPath) {
+
+            dataFolder = new File("C:/Users/" + dataPath);
+            if (!dataFolder.exists()) {
+                dataFolder.mkdirs();
+            }
+
+            contactFolder = new File("C:/Users/" + dataPath + "/contacts");
+            if (!contactFolder.exists()) {
+                contactFolder.mkdirs();
+            }
+    }
+
+
     @Override
     public void contactCreation(String[] info) {
-        super.contactCreation(info);
-        File myFile = new File(String.valueOf(idCount));
+        try {
+            super.contactCreation(info);
+            File contact = new File("C:/Users/ContactsInfo/" + idCount + ".txt");
+            contact.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
+
         return super.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
+
+
+
     }
 
     @Override
     public void deleteContact(int givenID) {
         super.deleteContact(givenID);
-    }
-
-    public void createFolder(String dataPath){
-        File dir = new File("contactes");
-        if(dir.exists() && dir.isDirectory());
-        else
-            if(dir.mkdir());
-            else throw new RuntimeException("Error: No se pudo crear el directorio '" + dir + "'.");
-
     }
 }
