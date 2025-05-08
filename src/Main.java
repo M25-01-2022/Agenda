@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    static Controller ctrl = new Controller();
+    static FileController ctrl = new FileController();
 
     public static void main(String[] args) {
 
