@@ -12,8 +12,6 @@ public abstract class Controller {
 
         contactsList.add(a);
 
-        setIdCount(idCount);
-
     }
 
     public void setIdCount(int idCount) {

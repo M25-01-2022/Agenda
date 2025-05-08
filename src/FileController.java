@@ -11,11 +11,13 @@ public class FileController extends Controller {
             dataFolder = new File("C:/Users/" + dataPath);
             if (!dataFolder.exists()) {
                 dataFolder.mkdirs();
+                System.out.println("created");
             }
 
             contactFolder = new File("C:/Users/" + dataPath + "/contacts");
             if (!contactFolder.exists()) {
                 contactFolder.mkdirs();
+                System.out.println("created2");
             }
     }
 
@@ -24,8 +26,10 @@ public class FileController extends Controller {
     public void contactCreation(String[] info) {
         try {
             super.contactCreation(info);
-            File contact = new File("C:/Users/ContactsInfo/" + idCount + ".txt");
-            contact.createNewFile();
+            FileWriter contact = new FileWriter(contactFolder + "/" + idCount + ".txt", true);
+            contact.write(String.valueOf(contactsList.get(idCount - 1)));
+            contact.close();
+            setIdCount(idCount);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

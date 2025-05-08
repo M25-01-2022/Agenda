@@ -4,9 +4,11 @@ public class Main {
 
     static FileController ctrl = new FileController("data");
 
-    public static void main(String[] args) {
+    static TUI newMenu = new TUI();
 
-        TUI newMenu = new TUI();
+
+
+    public static void main(String[] args) {
 
         newMenu.summonMainMenu();
 
