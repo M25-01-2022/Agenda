@@ -8,17 +8,17 @@ public class FileController extends Controller {
 
     public FileController(String dataPath) {
 
-            dataFolder = new File("C:/Users/" + dataPath);
-            if (!dataFolder.exists()) {
-                dataFolder.mkdirs();
-                System.out.println("created");
-            }
+        dataFolder = new File("C:/Users/" + dataPath);
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+            System.out.println("created");
+        }
 
-            contactFolder = new File("C:/Users/" + dataPath + "/contacts");
-            if (!contactFolder.exists()) {
-                contactFolder.mkdirs();
-                System.out.println("created2");
-            }
+        contactFolder = new File("C:/Users/" + dataPath + "/contacts");
+        if (!contactFolder.exists()) {
+            contactFolder.mkdirs();
+            System.out.println("created2");
+        }
     }
 
 
@@ -45,7 +45,19 @@ public class FileController extends Controller {
     }
 
     @Override
-    public void deleteContact(int givenID) {
-        super.deleteContact(givenID);
+    public void deleteContact(int idCount) {
+        super.deleteContact(idCount);
+        try {
+            File deletefile = new File(contactFolder + "/" + idCount + ".txt");
+            if (deletefile.exists()) {
+                System.out.println("File deleted successfully");
+            } else if (!deletefile.delete()) {
+                System.out.println("Could not delete file: " + deletefile.getName());
+            } else {
+                System.out.println("The file does not exist: " + deletefile.getName());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting contact file: " + idCount, e);
+        }
     }
 }

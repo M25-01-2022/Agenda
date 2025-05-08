@@ -54,5 +54,4 @@ public class Contacte {
     public String toString(){
         return "\nID: " + id + "\nName: " + nom + "\nSurname: " + cognom + "\nPhone: " + telefon + "\nEmail: " + email + "\n--------\n";
     }
-
 }
