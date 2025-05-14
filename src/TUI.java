@@ -80,16 +80,23 @@ public class TUI {
         String changeMail = sc.next();
 
         Main.updation(selectedID, changeName, changeSur, changePhone, changeMail);
+
+
     }
 
     public void showAllContacts() {
         showLine(String.valueOf(Main.revelation()));
     }
+
     public void summonDeletionMenu() {
+
         try {
+
             showLine("Please input the ID of the contact you want to delete.");
+
             int givenID = sc.nextInt();
-            Main.deletion(givenID);
+
+        Main.deletion(givenID);
 
         } catch (InputMismatchException java_error) {
             // catching the error, returning the menu
@@ -98,11 +105,15 @@ public class TUI {
         }
 
         showLine("The contact has been deleted.");
+
         try {
+
             showLine("What would you like to do now?");
             showLine(" 1. Delete another contact.");
             showLine(" 2. Return to the main menu.");
+
             int actionDelete = sc.nextInt();
+
             if (actionDelete == 1) {
                 summonDeletionMenu();
             } else if (actionDelete == 2) {
@@ -110,10 +121,12 @@ public class TUI {
             } else {
                 showLine("Input not recognized, please choose an option.");
             }
+
         } catch (InputMismatchException java_error) {
             // catching the error, returning the menu
             showLine("Input not recognized, please choose an option.");
         }
+
     }
 
     public void summonSearchMenu() {
@@ -126,43 +139,43 @@ public class TUI {
         showLine(" 5. Search by email.");
         showLine(" 6. Return to the main menu.");
 
-        searchContact();
+                searchContact();
 
-    }
+        }
 
     public void searchContact() {
 
-        try {
+            try {
 
-            int actionSearch = sc.nextInt();
+                int actionSearch = sc.nextInt();
 
-            if (actionSearch == 1) {
-                showLine("Searching by ID number...");
-                searchID();
-            } else if (actionSearch == 2) {
-                showLine("Searching by name...");
-                searchName();
-            } else if (actionSearch == 3) {
-                showLine("Searching by surname...");
-                searchSurname();
-            } else if (actionSearch == 4) {
-                showLine("Searching by phone number...");
-                searchPhone();
-            } else if (actionSearch == 5) {
-                showLine("Searching by email...");
-                searchEmail();
-            } else if (actionSearch == 6) {
-                showLine("Returning to main menu...");
-                summonMainMenu();
-            } else {
+                if (actionSearch == 1) {
+                    showLine("Searching by ID number...");
+                    searchID();
+                } else if (actionSearch == 2) {
+                    showLine("Searching by name...");
+                    searchName();
+                } else if (actionSearch == 3) {
+                    showLine("Searching by surname...");
+                    searchSurname();
+                } else if (actionSearch == 4) {
+                    showLine("Searching by phone number...");
+                    searchPhone();
+                } else if (actionSearch == 5) {
+                    showLine("Searching by email...");
+                    searchEmail();
+                } else if (actionSearch == 6) {
+                    showLine("Returning to main menu...");
+                    summonMainMenu();
+                } else {
+                    showLine("Input not recognized, please choose an option.");
+                    summonSearchMenu();
+                }
+            } catch (InputMismatchException java_error) {
+                // catching the error, returning the menu
                 showLine("Input not recognized, please choose an option.");
                 summonSearchMenu();
             }
-        } catch (InputMismatchException java_error) {
-            // catching the error, returning the menu
-            showLine("Input not recognized, please choose an option.");
-            summonSearchMenu();
-        }
     }
 
     public void searchID () {
@@ -235,9 +248,9 @@ public class TUI {
 
             String emailAdd = sc.next();
 
-            String[] info = {name,surname,phone,emailAdd};
+        String[] info = {name,surname,phone,emailAdd};
 
-            Main.creation(info);
+        Main.creation(info);
 
             showLine("Your new contact has been added!");
             showLine("ID: " + Main.currentID());
@@ -267,11 +280,13 @@ public class TUI {
             } else {
                 showLine("Input not recognized, please choose an option.");
             }
+
         } catch (InputMismatchException java_error) {
             // catching the error, returning the menu
             showLine("Input not recognized, please choose an option.");
         }
     }
+
     public void showLine(String output) {
         System.out.println(output);
     }
