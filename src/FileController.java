@@ -37,11 +37,15 @@ public class FileController extends Controller {
 
     @Override
     public Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
-
+        try {
+            super.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
+            FileWriter updateContact = new FileWriter (contactFolder + "/" + selectedID + ".txt", false);
+            updateContact.write(String.valueOf(contactsList.get(selectedID - 1)));
+            updateContact.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return super.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
-
-
-
     }
 
     @Override

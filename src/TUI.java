@@ -79,7 +79,11 @@ public class TUI {
 
         String changeMail = sc.next();
 
-        Main.updation(selectedID, changeName, changeSur, changePhone, changeMail);
+        showLine("Your contact has been updated:");
+
+        showLine(String.valueOf(Main.updation(selectedID, changeName, changeSur, changePhone, changeMail)));
+
+
 
 
     }
