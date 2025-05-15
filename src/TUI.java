@@ -42,7 +42,6 @@ public class TUI {
                     System.exit(0);
                 } else {
                     showLine("Input not recognized, please choose an option.");
-
                 }
 
             } catch (InputMismatchException java_error) {
