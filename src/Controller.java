@@ -1,14 +1,14 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public abstract class Controller {
 
     protected int idCount = 1;
 
-    ArrayList<Contacte> contactsList = new ArrayList<>();
+    HashMap<String, Contacte> contactsList = new HashMap<>();
 
     public void contactCreation(String[] info) {
         Contacte a = new Contacte(idCount, info[0], info[1], info[2], info[3]);
-        contactsList.add(a);
+        contactsList.put(String.valueOf(a.getId()), a);
     }
 
     public void setIdCount(int idCount) {
@@ -30,19 +30,13 @@ public abstract class Controller {
         }
     }
 
-    public ArrayList<Contacte> contactDump() {
+    public HashMap<String, Contacte> contactDump() {
         return contactsList;
     }
 
     public Contacte searchingID(int inputID) {
 
-        Contacte foundIt = null;
-        for (int i = 0; i < contactsList.size(); i++) {
-            if (inputID == contactsList.get(i).getId()) {
-                foundIt = contactsList.get(i);
-                break;
-            }
-        }
+        Contacte foundIt = contactsList.get(inputID);
         if (foundIt == null) {
             System.out.println("The contact you are looking for with ID '" + inputID + "' does not exist. \nIs");
         }
@@ -53,9 +47,9 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputName.equalsIgnoreCase(contactsList.get(i).getNom())) {
-
-                foundIt = contactsList.get(i);
+            Contacte current = contactsList.get(i);
+            if (inputName.equalsIgnoreCase(current.getNom())) {
+                foundIt = current;
                 break;
             }
         }
@@ -69,9 +63,10 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputSur.equalsIgnoreCase(contactsList.get(i).getCognom())) {
+            Contacte current = contactsList.get(i);
+            if (inputSur.equalsIgnoreCase(current.getCognom())) {
 
-                foundIt = contactsList.get(i);
+                foundIt = current;
                 break;
             }
         }
@@ -85,9 +80,9 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputPhone.equalsIgnoreCase(contactsList.get(i).getTelefon())) {
+            if (inputPhone.equalsIgnoreCase(contactsList.getTelefon())) {
 
-                foundIt = contactsList.get(i);
+                foundIt = contactsList;
                 break;
             }
         }
@@ -101,9 +96,9 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputMail.equalsIgnoreCase(contactsList.get(i).getEmail())) {
+            if (inputMail.equalsIgnoreCase(contactsList.getEmail())) {
 
-                foundIt = contactsList.get(i);
+                foundIt = contactsList;
                 break;
             }
         }
@@ -118,28 +113,28 @@ public abstract class Controller {
         Contacte changedIt = null;
 
         for (int i = 0; i < contactsList.size(); i++) {
-            if (selectedID == contactsList.get(i).getId()) {
+            if (selectedID == contactsList.getId()) {
                 if (changeName.equalsIgnoreCase("*")) {
                     break;
                 } else {
-                    contactsList.get(i).setNom(changeName);
+                    contactsList.setNom(changeName);
                 }
                 if (changeSur.equalsIgnoreCase("*")) {
                     break;
                 } else {
-                    contactsList.get(i).setCognom(changeSur);
+                    contactsList.setCognom(changeSur);
                 }
                 if (changePhone.equalsIgnoreCase("*")) {
                     break;
                 } else {
-                    contactsList.get(i).setTelefon(changePhone);
+                    contactsList.setTelefon(changePhone);
                 }
                 if (changeMail.equalsIgnoreCase("*")) {
                     break;
                 } else {
-                    contactsList.get(i).setEmail(changeMail);
+                    contactsList.setEmail(changeMail);
                 }
-                changedIt = contactsList.get(i);
+                changedIt = contactsList;
 
             }
         }

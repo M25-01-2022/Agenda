@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
@@ -62,7 +63,7 @@ public class Main {
 
     }
 
-    public static ArrayList<Contacte> revelation() {
+    public static HashMap<String, Contacte> revelation() {
         return ctrl.contactDump();
     }
 
