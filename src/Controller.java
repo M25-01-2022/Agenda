@@ -47,9 +47,9 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputName.equalsIgnoreCase(contactsList.getNom())) {
-
-                foundIt = contactsList;
+            Contacte current = contactsList.get(i);
+            if (inputName.equalsIgnoreCase(current.getNom())) {
+                foundIt = current;
                 break;
             }
         }
@@ -63,9 +63,10 @@ public abstract class Controller {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputSur.equalsIgnoreCase(contactsList.getCognom())) {
+            Contacte current = contactsList.get(i);
+            if (inputSur.equalsIgnoreCase(current.getCognom())) {
 
-                foundIt = contactsList;
+                foundIt = current;
                 break;
             }
         }
