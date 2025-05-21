@@ -35,29 +35,35 @@ public abstract class Controller {
     }
 
     public Contacte searchingID(int inputID) {
-
-        Contacte foundIt = contactsList.get(inputID);
-        if (foundIt == null) {
-            System.out.println("The contact you are looking for with ID '" + inputID + "' does not exist. \nIs");
+        if (contactsList.containsKey(inputID)) {
+            Contacte foundIt = contactsList.get(inputID);
+            System.out.println("Contact found:");
+            System.out.println(foundIt);
+            return foundIt;
+        } else {
+            System.out.println("The contact you are looking for with ID '" + inputID + "' does not exist.");
+            return null;
         }
-        return foundIt;
     }
 
-    public Contacte searchingName(String inputName) {
 
+    public Contacte searchingName(String inputName) {
         Contacte foundIt = null;
-        for (int i = 0; i < contactsList.size(); i++) {
-            Contacte current = contactsList.get(i);
-            if (inputName.equalsIgnoreCase(current.getNom())) {
+
+        for (Contacte current : contactsList.values()) {
+            if (current != null && inputName.equalsIgnoreCase(current.getNom())) {
                 foundIt = current;
                 break;
             }
         }
+
         if (foundIt == null) {
-            System.out.println("The contact you are looking for with name '" + inputName + "' does not exist. \nIs");
+            System.out.println("The contact you are looking for with name '" + inputName + "' does not exist.");
         }
+
         return foundIt;
     }
+
 
     public Contacte searchingSurname(String inputSur) {
 
@@ -77,28 +83,29 @@ public abstract class Controller {
     }
 
     public Contacte searchingPhone(String inputPhone) {
-
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputPhone.equalsIgnoreCase(contactsList.getTelefon())) {
-
-                foundIt = contactsList;
+            Contacte current = contactsList.get(i);
+            if (inputPhone.equalsIgnoreCase(current.getTelefon())) {
+                foundIt = current;
                 break;
             }
         }
         if (foundIt == null) {
-            System.out.println("The contact you are looking for with phone '" + inputPhone + "' does not exist. \nIs");
+            System.out.println("The contact you are looking for with phone '" + inputPhone + "' does not exist.");
         }
         return foundIt;
     }
+
 
     public Contacte searchingEmail(String inputMail) {
 
         Contacte foundIt = null;
         for (int i = 0; i < contactsList.size(); i++) {
-            if (inputMail.equalsIgnoreCase(contactsList.getEmail())) {
+            Contacte current = contactsList.get(i);
+            if (inputMail.equalsIgnoreCase(current.getEmail())) {
 
-                foundIt = contactsList;
+                foundIt = current;
                 break;
             }
         }
@@ -109,33 +116,30 @@ public abstract class Controller {
     }
 
     public Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
-
         Contacte changedIt = null;
 
         for (int i = 0; i < contactsList.size(); i++) {
-            if (selectedID == contactsList.getId()) {
-                if (changeName.equalsIgnoreCase("*")) {
-                    break;
-                } else {
-                    contactsList.setNom(changeName);
-                }
-                if (changeSur.equalsIgnoreCase("*")) {
-                    break;
-                } else {
-                    contactsList.setCognom(changeSur);
-                }
-                if (changePhone.equalsIgnoreCase("*")) {
-                    break;
-                } else {
-                    contactsList.setTelefon(changePhone);
-                }
-                if (changeMail.equalsIgnoreCase("*")) {
-                    break;
-                } else {
-                    contactsList.setEmail(changeMail);
-                }
-                changedIt = contactsList;
+            Contacte current = contactsList.get(i);
+            if (selectedID == current.getId()) {
 
+                if (!changeName.equals("*")) {
+                    current.setNom(changeName);
+                }
+
+                if (!changeSur.equals("*")) {
+                    current.setCognom(changeSur);
+                }
+
+                if (!changePhone.equals("*")) {
+                    current.setTelefon(changePhone);
+                }
+
+                if (!changeMail.equals("*")) {
+                    current.setEmail(changeMail);
+                }
+
+                changedIt = current;
+                break;
             }
         }
         return changedIt;
