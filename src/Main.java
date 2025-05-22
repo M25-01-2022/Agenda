@@ -1,12 +1,14 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
 
-    static FileController ctrl = new FileController();
+    static FileController ctrl = new FileController("data");
+
+    static TUI newMenu = new TUI();
+
+
 
     public static void main(String[] args) {
-
-        TUI newMenu = new TUI();
 
         newMenu.summonMainMenu();
 
@@ -60,7 +62,7 @@ public class Main {
 
     }
 
-    public static ArrayList<Contacte> revelation() {
+    public static Map<Integer, Contacte> revelation() {
         return ctrl.contactDump();
     }
 
