@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class Controller {
+public class Controller {
 
     protected int idCount = 1;
 
