@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class Main {
 
@@ -62,7 +62,7 @@ public class Main {
 
     }
 
-    public static HashMap<String, Contacte> revelation() {
+    public static Map<Integer, Contacte> revelation() {
         return ctrl.contactDump();
     }
 

@@ -9,84 +9,70 @@ public class FileController extends Controller {
     private File contactFolder;
 
     public FileController(String dataPath) {
-
         dataFolder = new File("data");
         if (!dataFolder.exists()) {
             dataFolder.mkdirs();
-            System.out.println("Missing data directory created.");
         }
 
         contactFolder = new File("data/contacts");
         if (!contactFolder.exists()) {
             contactFolder.mkdirs();
-            System.out.println("Missing contacts directory created.");
         }
 
         if (contactFolder.exists() && contactFolder.isDirectory()) {
-            // Obtenim la llista de fitxers dins el directori
             File[] files = contactFolder.listFiles((d, name) -> name.endsWith(".txt"));
-            if (files != null && files.length > 0) {
+            if (files != null) {
                 for (File file : files) {
                     try {
                         List<String> lines = Files.readAllLines(file.toPath());
-                        System.out.println("Carregant fitxer: " + file.getName());
-                        for (String line : lines) {
-                            int id = 0;
-                            String nom = null;
-                            String cognom = null;
-                            String phone = null;
-                            String mail = null;
-                            line = line.trim();
-                            if (line.startsWith("ID:")) {
-                                id = Integer.parseInt(line.replace("ID:", "").trim());
-                            } else if (line.startsWith("Name:")) {
-                                nom = line.replace("Name:", "").trim();
-                            } else if (line.startsWith("Surname:")) {
-                                cognom = line.replace("Surname:", "").trim();
-                            } else if (line.startsWith("Phone:")) {
-                                phone = line.replace("Phone:", "").trim();
-                            } else if (line.startsWith("Email:")) {
-                                mail = line.replace("Email:", "").trim();
-                            }
 
-                            if (id != 0 && nom != null && cognom != null && phone != null && mail != null) {
-                                contactsList.add(new Contacte(id, nom, cognom, phone, mail));
-                                id = 0;
-                                nom = null;
-                                cognom = null;
-                                phone = null;
-                                mail = null;
+                        int id = 0;
+                        String nom = null, cognom = null, phone = null, mail = null;
+
+                        for (String line : lines) {
+                            line = line.trim();
+                            if (line.startsWith("ID:")) id = Integer.parseInt(line.replace("ID:", "").trim());
+                            else if (line.startsWith("Name:")) nom = line.replace("Name:", "").trim();
+                            else if (line.startsWith("Surname:")) cognom = line.replace("Surname:", "").trim();
+                            else if (line.startsWith("Phone:")) phone = line.replace("Phone:", "").trim();
+                            else if (line.startsWith("Email:")) mail = line.replace("Email:", "").trim();
+                        }
+
+                        if (id > 0 && nom != null && cognom != null && phone != null && mail != null) {
+                            contactsList.put(id, new Contacte(id, nom, cognom, phone, mail));
+                            if (id >= idCount) {
+                                idCount = id + 1;
                             }
                         }
 
                     } catch (IOException e) {
-                        System.err.println("Error llegint el fitxer " + file.getName() + ": " + e.getMessage());
+                        System.err.println("Error reading file: " + file.getName());
                     }
                 }
-            } else {
-                System.out.println("No hi ha fitxers .txt al directori.");
             }
-        } else {
-            System.err.println("El directori no existeix o no és vàlid.");
         }
     }
-
-
-
 
 
     @Override
     public void contactCreation(String[] info) {
-        try {
-            super.contactCreation(info);
-            FileWriter contact = new FileWriter(contactFolder + "/" + idCount + ".txt", true);
-            contact.write(String.valueOf(contactsList.get(idCount - 1)));
-            contact.close();
-            setIdCount(idCount);
+        int currentId = idCount;
+        super.contactCreation(info);
+        Contacte c = contactsList.get(currentId);
+
+        if (c == null) {
+            System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
+            return;
+        }
+        try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getId() + ".txt")) {
+            fw.write(c.toString());
+            System.out.println("Contacto guardado en archivo: " + c.getId() + ".txt");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error al guardar el contacto: " + e.getMessage());
         }
     }
+
+
 
     @Override
     public Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
