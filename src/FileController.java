@@ -56,13 +56,12 @@ public class FileController extends Controller {
 
     @Override
     public void contactCreation(String[] info) {
-        int currentId = idCount;
+
         super.contactCreation(info);
-        Contacte c = contactsList.get(currentId);
+        Contacte c = contactsList.get(idCount);
 
         if (c == null) {
-            System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
-            return;
+            System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + idCount);
         }
         try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getId() + ".txt")) {
             fw.write(c.toString());
@@ -70,6 +69,7 @@ public class FileController extends Controller {
         } catch (IOException e) {
             System.err.println("Error al guardar el contacto: " + e.getMessage());
         }
+
     }
 
 
@@ -79,7 +79,7 @@ public class FileController extends Controller {
         try {
             super.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
             FileWriter updateContact = new FileWriter (contactFolder + "/" + selectedID + ".txt", false);
-            updateContact.write(String.valueOf(contactsList.get(selectedID - 1)));
+            updateContact.write(String.valueOf(contactsList.get(selectedID)));
             updateContact.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -93,9 +93,7 @@ public class FileController extends Controller {
         try {
             File deletefile = new File(contactFolder + "/" + idCount + ".txt");
             if (deletefile.exists()) {
-                System.out.println("File deleted successfully");
-            } else if (!deletefile.delete()) {
-                System.out.println("Could not delete file: " + deletefile.getName());
+                deletefile.delete();
             } else {
                 System.out.println("The file does not exist: " + deletefile.getName());
             }

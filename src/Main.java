@@ -66,9 +66,9 @@ public class Main {
         return ctrl.contactDump();
     }
 
-    public static void updation(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
+    public static Contacte updation(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
 
-        ctrl.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
+        return ctrl.updatingContacte(selectedID, changeName, changeSur, changePhone, changeMail);
 
     }
 

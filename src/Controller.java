@@ -9,6 +9,7 @@ public abstract class Controller {
     public void contactCreation(String[] info) {
         Contacte a = new Contacte(idCount, info[0], info[1], info[2], info[3]);
         contactsList.put(a.getId(), a);
+        setIdCount(idCount);
     }
 
     public void setIdCount(int idCount) {
@@ -38,7 +39,6 @@ public abstract class Controller {
         if (contactsList.containsKey(inputID)) {
             Contacte foundIt = contactsList.get(inputID);
             System.out.println("Contact found:");
-            System.out.println(foundIt);
             return foundIt;
         } else {
             System.out.println("The contact you are looking for with ID '" + inputID + "' does not exist.");

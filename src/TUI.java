@@ -78,7 +78,10 @@ public class TUI {
 
         String changeMail = sc.next();
 
-        Main.updation(selectedID, changeName, changeSur, changePhone, changeMail);
+        showLine("Your contact has been updated, the new fields are:");
+
+        showLine(String.valueOf(Main.updation(selectedID, changeName, changeSur, changePhone, changeMail)));
+
 
 
     }
@@ -249,9 +252,11 @@ public class TUI {
 
             String[] info = {name,surname,phone,emailAdd};
 
+            showLine("Your new contact has been added!");
+
             Main.creation(info);
 
-            showLine("Your new contact has been added!");
+
             showLine("ID: " + Main.currentID());
             showLine("Name: " + name);
             showLine("Surname: " + surname);
