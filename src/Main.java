@@ -20,12 +20,6 @@ public class Main {
 
     }
 
-    public static int currentID() {
-
-        return ctrl.currentIDCount();
-
-    }
-
     public static Contacte findID(int inputID) {
 
         return ctrl.searchingID(inputID);

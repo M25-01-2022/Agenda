@@ -2,7 +2,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public class FileController extends Controller {
+public class FileController extends MemoryController {
 
     private File dataFolder;
 
