@@ -33,7 +33,7 @@ public interface Controller {
         Contacte foundIt = null;
 
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputName.equalsIgnoreCase(current.getNom())) {
+            if (current != null && inputName.equalsIgnoreCase(current.getName())) {
                 foundIt = current;
                 break;
             }
@@ -47,7 +47,7 @@ public interface Controller {
         Contacte foundIt = null;
 
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputSur.equalsIgnoreCase(current.getCognom())) {
+            if (current != null && inputSur.equalsIgnoreCase(current.getSurnames())) {
                 foundIt = current;
                 break;
             }
@@ -59,7 +59,7 @@ public interface Controller {
     default Contacte searchingPhone(String inputPhone) {
         Contacte foundIt = null;
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputPhone.equalsIgnoreCase(current.getTelefon())) {
+            if (current != null && inputPhone.equalsIgnoreCase(current.getPhone())) {
                 foundIt = current;
                 break;
             }
@@ -85,15 +85,15 @@ public interface Controller {
 
         if (current != null) {
             if (!changeName.equals("*")) {
-                current.setNom(changeName);
+                current.setName(changeName);
             }
 
             if (!changeSur.equals("*")) {
-                current.setCognom(changeSur);
+                current.setSurnames(changeSur);
             }
 
             if (!changePhone.equals("*")) {
-                current.setTelefon(changePhone);
+                current.setPhone(changePhone);
             }
 
             if (!changeMail.equals("*")) {

@@ -39,7 +39,7 @@ public class FileController extends MemoryController {
                         }
 
                         if (id > 0 && nom != null && cognom != null && phone != null && mail != null) {
-                            contactsList.put(id, new Contacte(id, nom, cognom, phone, mail));
+                            contactsList.put(id, new Contacte(nom, cognom, phone, mail));
                             if (id >= idCount) {
                                 idCount = id + 1;
                             }
@@ -64,9 +64,9 @@ public class FileController extends MemoryController {
             System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
             return;
         }
-        try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getId() + ".txt")) {
+        try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getID() + ".txt")) {
             fw.write(c.toString());
-            System.out.println("Contacto guardado en archivo: " + c.getId() + ".txt");
+            System.out.println("Contacto guardado en archivo: " + c.getID() + ".txt");
         } catch (IOException e) {
             System.err.println("Error al guardar el contacto: " + e.getMessage());
         }

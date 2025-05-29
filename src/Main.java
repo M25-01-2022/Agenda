@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
 
-    static FileController ctrl = new FileController("data");
+    static DataBaseController ctrl = new DataBaseController();
 
     static TUI newMenu = new TUI();
 
