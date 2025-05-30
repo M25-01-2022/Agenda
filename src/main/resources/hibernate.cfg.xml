@@ -7,8 +7,7 @@
     <session-factory>
         <!-- Database connection properties -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://10.2.79.225:5432/agenda</property>
-        <!--<property name="hibernate.connection.url">jdbc:postgresql://192.168.237.197:5432/agenda</property>-->
+        <property name="hibernate.connection.url">jdbc:postgresql://10.2.35.60:5432/agendacontactos</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">postgres</property>
 
@@ -22,7 +21,7 @@
 
         <!-- Mapping files or annotated classes -->
         <!-- Add your entity classes or mapping files here  for ex: entity used below -->
-        <mapping class="Backend.Contact"/>
+        <mapping class="Contacte"/>
 
     </session-factory>
 </hibernate-configuration>

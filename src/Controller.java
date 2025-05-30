@@ -5,9 +5,7 @@ public interface Controller {
 
     HashMap<Integer, Contacte> contactsList = new HashMap<>();
 
-    default void contactCreation(String[] info) {
-
-    }
+    void contactCreation(String[] info);
 
     default void deleteContact(int givenID) {
         if (contactsList.containsKey(givenID)) {
@@ -29,12 +27,12 @@ public interface Controller {
     }
 
 
-    default Contacte searchingName(String inputName) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingName(String inputName) {
+        Map<Integer, Contacte> foundIt = null;
 
         for (Contacte current : contactsList.values()) {
             if (current != null && inputName.equalsIgnoreCase(current.getName())) {
-                foundIt = current;
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
         }
@@ -43,12 +41,12 @@ public interface Controller {
     }
 
 
-    default Contacte searchingSurname(String inputSur) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingSurname(String inputSur) {
+        Map<Integer, Contacte> foundIt = null;
 
         for (Contacte current : contactsList.values()) {
             if (current != null && inputSur.equalsIgnoreCase(current.getSurnames())) {
-                foundIt = current;
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
         }
@@ -56,24 +54,24 @@ public interface Controller {
         return foundIt;
     }
 
-    default Contacte searchingPhone(String inputPhone) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingPhone(String inputPhone) {
+        Map<Integer, Contacte> foundIt = null;
         for (Contacte current : contactsList.values()) {
             if (current != null && inputPhone.equalsIgnoreCase(current.getPhone())) {
-                foundIt = current;
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
         }
         return foundIt;
     }
 
-    default Contacte searchingEmail(String inputMail) {
+    default Map<Integer, Contacte> searchingEmail(String inputMail) {
 
-        Contacte foundIt = null;
+        Map<Integer, Contacte> foundIt = null;
         for (Contacte current : contactsList.values()) {
             if (current != null && inputMail.equalsIgnoreCase(current.getEmail())) {
 
-                foundIt = current;
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
         }

@@ -58,15 +58,14 @@ public class FileController extends MemoryController {
     public void contactCreation(String[] info) {
         int currentId = idCount;
         super.contactCreation(info);
-        Contacte c = contactsList.get(currentId);
+        Contacte a = contactsList.get(currentId);
 
-        if (c == null) {
+        if (a == null) {
             System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
             return;
         }
-        try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getID() + ".txt")) {
-            fw.write(c.toString());
-            System.out.println("Contacto guardado en archivo: " + c.getID() + ".txt");
+        try (FileWriter fw = new FileWriter(contactFolder + "/" + a.getID() + ".txt")) {
+            fw.write(a.toString());
         } catch (IOException e) {
             System.err.println("Error al guardar el contacto: " + e.getMessage());
         }
@@ -92,9 +91,7 @@ public class FileController extends MemoryController {
         super.deleteContact(idCount);
         try {
             File deletefile = new File(contactFolder + "/" + idCount + ".txt");
-            if (deletefile.exists()) {
-                System.out.println("File deleted successfully");
-            } else if (!deletefile.delete()) {
+            if (!deletefile.delete()) {
                 System.out.println("Could not delete file: " + deletefile.getName());
             } else {
                 System.out.println("The file does not exist: " + deletefile.getName());

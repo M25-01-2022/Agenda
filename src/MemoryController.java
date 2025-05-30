@@ -1,33 +1,41 @@
 import java.lang.reflect.Field;
-
+import java.util.List;
 public class MemoryController implements Controller {
+
+    private List<Contacte> contacts;
 
     protected int idCount = 1;
 
     public MemoryController() {
-
     }
 
-    @Override
-    public void contactCreation(String[] info) {
-        Contacte a = new Contacte(info[0], info[1], info[2], info[3]);
-        contactsList.put(a.getID(), a);
-        setIdCount(idCount);
+    public int getIdCount() {
+        return idCount;
     }
 
-    public void setIdCount(int idCount) {
-        idCount++;
-        this.idCount = idCount;
+    public void upIDCount (int idCount) {
+        this.idCount = ++idCount;
     }
 
-    protected void setContactID(Contacte c, int id) {
+    protected void setContactID(Contacte a, int idCount) {
         try {
-            Field idField = c.getClass().getDeclaredField("ID");
+            Field idField = a.getClass().getDeclaredField("ID");
             idField.setAccessible(true);
-            idField.setInt(c, id);
+            idField.setInt(a, idCount);
+            upIDCount(idCount);
             idField.setAccessible(false);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void contactCreation(String[] info) {
+    }
+
+
+    protected List<Contacte> getContacts() {
+        return contacts;
+    }
+
 }
