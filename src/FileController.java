@@ -2,7 +2,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public class FileController extends Controller {
+public class FileController extends MemoryController {
 
     private File dataFolder;
 
@@ -39,7 +39,7 @@ public class FileController extends Controller {
                         }
 
                         if (id > 0 && nom != null && cognom != null && phone != null && mail != null) {
-                            contactsList.put(id, new Contacte(id, nom, cognom, phone, mail));
+                            contactsList.put(id, new Contacte(nom, cognom, phone, mail));
                             if (id >= idCount) {
                                 idCount = id + 1;
                             }
@@ -58,15 +58,14 @@ public class FileController extends Controller {
     public void contactCreation(String[] info) {
         int currentId = idCount;
         super.contactCreation(info);
-        Contacte c = contactsList.get(currentId);
+        Contacte a = contactsList.get(currentId);
 
-        if (c == null) {
+        if (a == null) {
             System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
             return;
         }
-        try (FileWriter fw = new FileWriter(contactFolder + "/" + c.getId() + ".txt")) {
-            fw.write(c.toString());
-            System.out.println("Contacto guardado en archivo: " + c.getId() + ".txt");
+        try (FileWriter fw = new FileWriter(contactFolder + "/" + a.getID() + ".txt")) {
+            fw.write(a.toString());
         } catch (IOException e) {
             System.err.println("Error al guardar el contacto: " + e.getMessage());
         }
@@ -92,9 +91,7 @@ public class FileController extends Controller {
         super.deleteContact(idCount);
         try {
             File deletefile = new File(contactFolder + "/" + idCount + ".txt");
-            if (deletefile.exists()) {
-                System.out.println("File deleted successfully");
-            } else if (!deletefile.delete()) {
+            if (!deletefile.delete()) {
                 System.out.println("Could not delete file: " + deletefile.getName());
             } else {
                 System.out.println("The file does not exist: " + deletefile.getName());

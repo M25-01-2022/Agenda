@@ -1,57 +1,75 @@
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "contact")
 public class Contacte {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID;
 
-    protected int id;
-    protected String nom;
-    protected String cognom;
-    protected String telefon;
-    protected String email;
+    @Column(name = "name")
+    private String nom;
 
-    public Contacte(int id, String nom, String cognom, String telefon, String email) {
-        this.id = id;
-        this.nom = nom;
-        this.cognom = cognom;
-        this.telefon = telefon;
+    @Column(name = "surnames")
+    private String cognom;
+
+    @Column(name = "phone")
+    private String telefon;
+
+    @Column(name = "email")
+    private String email;
+
+    //Needed by hibernate
+    protected Contacte(){}
+
+    protected Contacte(String name, String surnames, String phone, String email) {
+        this.nom = name;
+        this.cognom = surnames;
+        this.telefon = phone;
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return this.ID;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return this.nom;
     }
 
-    public String getCognom() {
-        return cognom;
+    public String getSurnames() {
+        return this.cognom;
     }
 
-    public String getTelefon() {
-        return telefon;
+    public String getPhone() {
+        return this.telefon;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    protected void setName(String name) {
+        this.nom = name;
     }
 
-    public void setCognom(String cognom) {
-        this.cognom = cognom;
+    protected void setSurnames(String surnames) {
+        this.cognom = surnames;
     }
 
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
+    protected void setPhone(String phone) {
+        this.telefon = phone;
     }
 
-    public void setEmail(String email) {
+    protected void setEmail(String email) {
         this.email = email;
     }
 
-    @Override
     public String toString(){
-        return "\nID: " + id + "\nName: " + nom + "\nSurname: " + cognom + "\nPhone: " + telefon + "\nEmail: " + email + "\n--------\n";
+        return String.format("ID: %d\n  Name: %s\n  Surname: %s\n  Phone: %s\n  Email: %s", this.ID, this.nom, this.cognom, this.telefon, this.email);
+    }
+
+    public String toFileContent(){
+        return String.format("%d\n%s\n%s\n%s\n%s", this.ID, this.nom, this.cognom, this.telefon, this.email);
     }
 }

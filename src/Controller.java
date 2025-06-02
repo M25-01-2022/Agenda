@@ -1,141 +1,106 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Controller {
-
-    protected int idCount = 1;
+public interface Controller {
 
     HashMap<Integer, Contacte> contactsList = new HashMap<>();
 
-    public void contactCreation(String[] info) {
-        Contacte a = new Contacte(idCount, info[0], info[1], info[2], info[3]);
-        contactsList.put(a.getId(), a);
-    }
+    void contactCreation(String[] info);
 
-    public void setIdCount(int idCount) {
-        idCount++;
-        this.idCount = idCount;
-    }
-
-    public int currentIDCount() {
-        return this.idCount - 1;
-    }
-
-    public void deleteContact(int givenID) {
+    default void deleteContact(int givenID) {
         if (contactsList.containsKey(givenID)) {
             contactsList.remove(givenID);
-            System.out.println("Contact with ID " + givenID + " removed.");
-        } else {
-            System.out.println("There is no contact with ID " + givenID + ".");
         }
     }
 
 
-    public Map<Integer, Contacte> contactDump() {
+    default Map<Integer, Contacte> contactDump() {
         return contactsList;
     }
 
-    public Contacte searchingID(int inputID) {
+    default Contacte searchingID(int inputID) {
+        Contacte foundIt = null;
         if (contactsList.containsKey(inputID)) {
-            Contacte foundIt = contactsList.get(inputID);
-            System.out.println("Contact found:");
-            System.out.println(foundIt);
-            return foundIt;
-        } else {
-            System.out.println("The contact you are looking for with ID '" + inputID + "' does not exist.");
-            return null;
+            foundIt = contactsList.get(inputID);
         }
+        return foundIt;
     }
 
 
-    public Contacte searchingName(String inputName) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingName(String inputName) {
+        Map<Integer, Contacte> foundIt = null;
 
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputName.equalsIgnoreCase(current.getNom())) {
-                foundIt = current;
+            if (current != null && inputName.equalsIgnoreCase(current.getName())) {
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
-        }
-
-        if (foundIt == null) {
-            System.out.println("The contact you are looking for with name '" + inputName + "' does not exist.");
         }
 
         return foundIt;
     }
 
 
-    public Contacte searchingSurname(String inputSur) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingSurname(String inputSur) {
+        Map<Integer, Contacte> foundIt = null;
 
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputSur.equalsIgnoreCase(current.getCognom())) {
-                foundIt = current;
+            if (current != null && inputSur.equalsIgnoreCase(current.getSurnames())) {
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
-        }
-
-        if (foundIt == null) {
-            System.out.println("The contact you are looking for with surname '" + inputSur + "' does not exist.");
         }
 
         return foundIt;
     }
 
-    public Contacte searchingPhone(String inputPhone) {
-        Contacte foundIt = null;
+    default Map<Integer, Contacte> searchingPhone(String inputPhone) {
+        Map<Integer, Contacte> foundIt = null;
         for (Contacte current : contactsList.values()) {
-            if (current != null && inputPhone.equalsIgnoreCase(current.getTelefon())) {
-                foundIt = current;
+            if (current != null && inputPhone.equalsIgnoreCase(current.getPhone())) {
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
-        }
-        if (foundIt == null) {
-            System.out.println("The contact you are looking for with phone '" + inputPhone + "' does not exist.");
         }
         return foundIt;
     }
 
-    public Contacte searchingEmail(String inputMail) {
+    default Map<Integer, Contacte> searchingEmail(String inputMail) {
 
-        Contacte foundIt = null;
+        Map<Integer, Contacte> foundIt = null;
         for (Contacte current : contactsList.values()) {
             if (current != null && inputMail.equalsIgnoreCase(current.getEmail())) {
 
-                foundIt = current;
+                foundIt = (Map<Integer, Contacte>) current;
                 break;
             }
-        }
-        if (foundIt == null) {
-            System.out.println("The contact you are looking for with mail '" + inputMail + "' does not exist. \nIs");
         }
         return foundIt;
     }
 
-    public Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
+    default Contacte updatingContacte(int selectedID, String changeName, String changeSur, String changePhone, String changeMail) {
         Contacte current = contactsList.get(selectedID);
 
         if (current != null) {
             if (!changeName.equals("*")) {
-                current.setNom(changeName);
+                current.setName(changeName);
             }
 
             if (!changeSur.equals("*")) {
-                current.setCognom(changeSur);
+                current.setSurnames(changeSur);
             }
 
             if (!changePhone.equals("*")) {
-                current.setTelefon(changePhone);
+                current.setPhone(changePhone);
             }
 
             if (!changeMail.equals("*")) {
                 current.setEmail(changeMail);
             }
             contactsList.put(selectedID, current);
-        } else {
-            System.out.println("Contact with ID " + selectedID + " not found.");
         }
 
         return current;
     }
+
 }

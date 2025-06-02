@@ -252,7 +252,6 @@ public class TUI {
             Main.creation(info);
 
             showLine("Your new contact has been added!");
-            showLine("ID: " + Main.currentID());
             showLine("Name: " + name);
             showLine("Surname: " + surname);
             showLine("Phone Number: " + phone);
