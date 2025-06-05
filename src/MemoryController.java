@@ -37,5 +37,4 @@ public class MemoryController implements Controller {
     protected List<Contacte> getContacts() {
         return contacts;
     }
-
 }

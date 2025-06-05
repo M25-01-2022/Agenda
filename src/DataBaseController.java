@@ -19,7 +19,7 @@ public class DataBaseController implements Controller, AutoCloseable  {
 
     public DataBaseController(){
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        this.factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        this.factory = new Configuration().configure("main/resources/hibernate.cfg.xml").buildSessionFactory();
         this.session = this.factory.openSession();
         this.criteriaBuilder = this.factory.getCriteriaBuilder();
     }
