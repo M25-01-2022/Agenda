@@ -9,14 +9,16 @@ public class FileController extends MemoryController {
     private File contactFolder;
 
     public FileController(String dataPath) {
-        dataFolder = new File("data");
+        dataFolder = new File(dataPath);
         if (!dataFolder.exists()) {
             dataFolder.mkdirs();
+            System.out.println("woop");
         }
 
         contactFolder = new File("data/contacts");
         if (!contactFolder.exists()) {
             contactFolder.mkdirs();
+            System.out.println("ahah");
         }
 
         if (contactFolder.exists() && contactFolder.isDirectory()) {
@@ -56,12 +58,11 @@ public class FileController extends MemoryController {
 
     @Override
     public void contactCreation(String[] info) {
-        int currentId = idCount;
         super.contactCreation(info);
-        Contacte a = contactsList.get(currentId);
+        Contacte a = contactsList.get(idCount);
 
         if (a == null) {
-            System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + currentId);
+            System.err.println("Error: No se pudo encontrar el contacto recién creado con ID: " + idCount);
             return;
         }
         try (FileWriter fw = new FileWriter(contactFolder + "/" + a.getID() + ".txt")) {

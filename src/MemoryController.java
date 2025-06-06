@@ -31,8 +31,10 @@ public class MemoryController implements Controller {
 
     @Override
     public void contactCreation(String[] info) {
+        Contacte a = new Contacte(info[0], info[1], info[2], info[3]);
+        setContactID(a,idCount);
+        contactsList.put(idCount, a);
     }
-
 
     protected List<Contacte> getContacts() {
         return contacts;

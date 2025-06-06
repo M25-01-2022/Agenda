@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
 
     static DataBaseController ctrl = new DataBaseController();
-    static FileController fCtrl = new FileController("data");
+    static FileController fCtrl = new FileController(System.getProperty("user.dir"));
 
     public static void main(String[] args) {
         new GUI();

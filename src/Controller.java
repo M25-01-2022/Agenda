@@ -1,3 +1,5 @@
+import jakarta.persistence.Id;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -5,7 +7,8 @@ public interface Controller {
 
     HashMap<Integer, Contacte> contactsList = new HashMap<>();
 
-    void contactCreation(String[] info);
+    default void contactCreation(String[] info) {
+    }
 
     default void deleteContact(int givenID) {
         if (contactsList.containsKey(givenID)) {
